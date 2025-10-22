@@ -48,9 +48,9 @@ pip install opencv-python==4.3.0.38 -i https://pypi.tuna.tsinghua.edu.cn/simple 
 #### 全连接神经网络(回归任务)实战，任务是根据空气质量数据，预测下一个小时的空气质量，数据集使用[AirQuality_ShiJiaZhuang.csv](DataSet/AirQuality_ShiJiaZhuang.csv)
 
 ### example5.py:
-#### 卷积神经网络(分类任务)实战，任务是根据图片判断是蚂蚁还是蜜蜂，数据集使用[昆虫识别](DataSet/%E6%98%86%E8%99%AB%E8%AF%86%E5%88%AB)
+#### 卷积神经网络(分类任务)实战，任务是根据图片判断是6种不同的钢板缺陷，数据集使用[钢板缺陷](DataSet/surfaceDefect)
 #### 注：这里用的是LeNet模型，详细图如下：
 ![LeNet-5卷积神经网络模型图示.png](ModelGraphic/LeNet%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B%E5%9B%BE%E7%A4%BA.png)![LeNet模型](./ModelGraphic/LeNet.png)
 
 ### example6.py:
-#### LSTM模型实战，任务是预测黄金价格
+#### LSTM模型实战，任务是预测黄金价格，数据集使用[黄金价格](DataSet/gold.csv)

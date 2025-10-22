@@ -10,17 +10,19 @@ plt.rcParams['font.sans-serif'] = ['SimHei']
 plt.rcParams['axes.unicode_minus'] = False
 
 # 把数据类别放置在列表数据中
-CLASS_NAME = np.array(['ants', 'bees'])
+CLASS_NAME = np.array(['crazing', 'inclusion','patches','pitted_surface','rolled-in_scale','scratches'])
 
 # 设置图片大小
 IMG_HEIGHT = 32 # 图片的高度
 IMG_WIDTH = 32 # 图片的宽度
 
 # 加载模型
-model = load_model('../Model/insect_identification.h5')
+model = load_model('../Model/surfaceDefect.h5')
 
 # 读取图片与预处理
-src = cv2.imread('../DataSet/insect_identification/val/bees/400262091_701c00031c.jpg') # 读取图片
+path = '../DataSet/surfaceDefect/test/'
+path += input('请输入测试图片的文件名：')
+src = cv2.imread(path) # 读取图片
 src = cv2.resize(src, (IMG_WIDTH, IMG_HEIGHT)) # 调整图片大小
 src = src.astype('int32') # 转换为int32类型
 src = src / 255  # 归一化处理

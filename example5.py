@@ -13,17 +13,17 @@ plt.rcParams['font.sans-serif'] = ['SimHei']
 plt.rcParams['axes.unicode_minus'] = False
 
 #读取训练集数据
-data_train = pathlib.Path('DataSet/insect_identification/train')
+data_train = pathlib.Path('DataSet/surfaceDefect/train')
 #读取验证集数据
-data_val = pathlib.Path('DataSet/insect_identification/val')
+data_val = pathlib.Path('DataSet/surfaceDefect/val')
 
 # 把数据类别放置在列表数据中
-CLASS_NAME = np.array(['ants', 'bees'])
+CLASS_NAME = np.array(['crazing', 'inclusion','patches','pitted_surface','rolled-in_scale','scratches'])
 
 # 设置图片大小和批次数
-BATCH_SIZE = 100 # 每个批次的样本数量
-IMG_HEIGHT = 64 # 图片的高度
-IMG_WIDTH = 64 # 图片的宽度
+BATCH_SIZE = 64 # 每个批次的样本数量
+IMG_HEIGHT = 32 # 图片的高度
+IMG_WIDTH = 32 # 图片的宽度
 
 # 对数据进行归一化处理，统一量纲加快收敛速度
 image_generator = keras.preprocessing.image.ImageDataGenerator(rescale=1.0/255)
@@ -53,29 +53,29 @@ model = keras.Sequential()
 # kernel_size: 卷积核的大小
 # activation: 激活函数
 # input_shape: 输入图片的大小，(图片的高度, 图片的宽度, 图片的通道数(这里是输入三通道彩色图))
-model.add(Conv2D(filters=6, kernel_size=(5,5), activation='relu', input_shape=(IMG_HEIGHT, IMG_WIDTH, 3)))
+model.add(Conv2D(filters=6, kernel_size=5, activation='relu', input_shape=(IMG_HEIGHT, IMG_WIDTH, 3)))
 # 池化层1
 # pool_size: 池化窗口(池化核)的大小
 # strides: 池化窗口的步幅
-model.add(MaxPool2D(pool_size=(2,2), strides=2))
+model.add(MaxPool2D(pool_size=(2,2), strides=(2,2)))
 # 卷积层2
-model.add(Conv2D(filters=16, kernel_size=(5,5), activation='relu'))
+model.add(Conv2D(filters=16, kernel_size=5, activation='relu'))
 # 池化层2
-model.add(MaxPool2D(pool_size=(2,2), strides=2))
+model.add(MaxPool2D(pool_size=(2,2), strides=(2,2)))
 # 卷积层3
-model.add(Conv2D(filters=120, kernel_size=(5,5), activation='relu'))
+model.add(Conv2D(filters=120, kernel_size=5, activation='relu'))
 # 平展层, 将2维图片展开为1维神经元
 model.add(Flatten())
 # 全连接层1
 model.add(Dense(84, activation='relu'))
 # 输出层
-model.add(Dense(2, activation='softmax'))
+model.add(Dense(6, activation='softmax'))
 
 # 编译模型
 # optimizer: 优化器，用于更新模型的权重(adam优化器)
 # loss: 损失函数，用于计算模型的误差(交叉熵损失函数)
 # metrics: 评估指标，用于评估模型的性能
-model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
 # 训练模型
 # epochs: 训练的轮数
@@ -83,7 +83,7 @@ model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy']
 history = model.fit(train_data_generator, epochs=50, validation_data=val_data_generator)
 
 # 保存训练好的模型
-model.save('./Model/insect_identification.h5')
+model.save('./Model/surfaceDefect.h5')
 
 # 绘制loss值
 plt.plot(history.history['loss'],label='train_loss')
