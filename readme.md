@@ -15,7 +15,7 @@
 ### 需要导入的包
 #### 该项目需要导入的包有：
 - tensorflow 2.4.0 
-- keras 2.4.3 
+- keras 2.4.3
 - numpy 1.19.5 
 - pandas 1.3.5 
 - matplotlib 3.4.2 
@@ -26,13 +26,12 @@
 ```
 # 可以自己换源，我这里用的是清华源，也可以用豆瓣源
 pip install opencv-python==4.3.0.38 -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn
+# 豆瓣源
+pip install opencv-python==4.3.0.38 -i https://pypi.douban.com/simple --trusted-host pypi.douban.com
+
 ```
 
----
-### 安装命令
-#### 分别对应安装命令为：
-- pip install opencv-python==4.3.0.38 -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.douban.com
-
+conda install -c conda-forge xxxx包 可以用来分析这个包的对应版本问题
 ---
 
 ### example1.py
